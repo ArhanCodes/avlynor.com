@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <!-- Outer circle -->
+  <circle cx="100" cy="100" r="78" stroke="#D4B572" stroke-width="2"/>
+  <!-- Sparkle / 4-point star at top of circle -->
+  <g transform="translate(100,22)">
+    <path d="M0 -10 L1.5 -1.5 L10 0 L1.5 1.5 L0 10 L-1.5 1.5 L-10 0 L-1.5 -1.5 Z" fill="#D4B572"/>
+  </g>
+  <!-- A/N monogram: stylised A inside a partial arc base -->
+  <!-- Left leg of A -->
+  <path d="M 60 155 L 100 50 L 140 155" stroke="#D4B572" stroke-width="2.8" stroke-linecap="square" fill="none"/>
+  <!-- N vertical-and-diagonal embedded in the A -->
+  <path d="M 80 152 L 80 78 L 120 152 L 120 78" stroke="#D4B572" stroke-width="2.2" stroke-linecap="square" fill="none"/>
+  <!-- Crossbar of A (subtle) -->
+  <path d="M 78 130 L 122 130" stroke="#D4B572" stroke-width="1.8" stroke-linecap="square"/>
+  <!-- Curved base arc that grounds the monogram inside the circle -->
+  <path d="M 40 158 Q 100 188 160 158" stroke="#D4B572" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <!-- Tiny dot below the curve -->
+  <circle cx="100" cy="170" r="2.4" fill="#D4B572"/>
+</svg>
