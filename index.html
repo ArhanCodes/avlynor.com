@@ -11,28 +11,22 @@
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 <style>
   /* -----------------------------------------------------------------
-     Bioluminescent palette — deep ocean
+     Brand tokens — match the Avlynor logo
   ----------------------------------------------------------------- */
   :root {
     --bg-0: #020812;            /* abyssal black-blue */
     --bg-1: #061427;            /* deep-water panel */
     --bg-2: #0c2240;            /* slightly lit panel */
-
-    --cyan: #7df9ff;            /* primary luminescent cyan */
-    --cyan-bright: #b8fcff;     /* highlight */
-    --cyan-mid: #3fb8d4;        /* mid aqua */
-    --cyan-deep: #1a5874;       /* deep teal */
-
-    --cream: #e6f7ff;           /* luminous text white */
-    --muted: #a8c5d4;           /* soft text */
-    --deep: #5a7a8c;            /* muted */
-
-    --line: rgba(125, 249, 255, 0.12);
-    --line-strong: rgba(125, 249, 255, 0.32);
-
+    --gold: #7df9ff;            /* primary luminescent cyan */
+    --gold-dark: #3fb8d4;
+    --gold-bright: #b8fcff;
+    --cream: #e6f7ff;
+    --muted: #a8c5d4;
+    --line: rgba(125, 249, 255, 0.18);
+    --line-strong: rgba(125, 249, 255, 0.38);
     --danger: #e85d6e;
     --success: #7df9ff;
-    --shadow-glow: 0 0 60px -20px rgba(125, 249, 255, 0.40);
+    --shadow-gold: 0 0 60px -20px rgba(125, 249, 255, 0.40);
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -44,24 +38,7 @@
     font-weight: 300;
     line-height: 1.55;
     overflow-x: hidden;
-    cursor: none;
-    -webkit-font-smoothing: antialiased;
-  }
-
-  /* Ambient deep-water backdrop */
-  .ambient {
-    position: fixed; inset: 0; z-index: -2;
-    pointer-events: none;
-    background:
-      radial-gradient(ellipse 80% 60% at 50% -10%, rgba(63, 184, 212, 0.18), transparent 60%),
-      radial-gradient(ellipse 60% 50% at 100% 30%, rgba(26, 88, 116, 0.28), transparent 60%),
-      radial-gradient(ellipse 70% 60% at 0% 70%, rgba(15, 58, 90, 0.42), transparent 60%),
-      linear-gradient(180deg, #020812 0%, #04101e 40%, #061427 100%);
-  }
-  .specks {
-    position: fixed; inset: 0; z-index: -1;
-    pointer-events: none;
-    opacity: 0.5;
+    cursor: none;     /* hide native cursor; custom cursor below */
   }
 
   /* -----------------------------------------------------------------
@@ -75,19 +52,17 @@
   }
   .cursor-dot {
     width: 6px; height: 6px;
-    background: var(--cyan);
-    border-radius: 50%;
-    box-shadow: 0 0 12px var(--cyan), 0 0 24px rgba(125, 249, 255, 0.45);
+    background: var(--gold); border-radius: 50%;
   }
   .cursor-ring {
     width: 32px; height: 32px;
-    border: 1px solid rgba(125, 249, 255, 0.40);
+    border: 1px solid rgba(125, 249, 255, 0.45);
     border-radius: 50%;
   }
   .cursor-ring.hover {
     width: 56px; height: 56px;
-    border-color: var(--cyan);
-    background: rgba(125, 249, 255, 0.05);
+    border-color: var(--gold);
+    background: rgba(125, 249, 255, 0.06);
   }
   @media (hover: none) {
     body { cursor: auto; }
@@ -95,42 +70,35 @@
   }
 
   /* -----------------------------------------------------------------
-     Decorative jellyfish-like radials (replace deck circles)
+     Decorative geometric circles (matches deck slide 1)
   ----------------------------------------------------------------- */
   .deco-circle {
     position: absolute;
     border-radius: 50%;
     z-index: 0;
     pointer-events: none;
-    filter: blur(2px);
   }
   .deco-circle.large {
     width: 540px; height: 540px;
-    background: radial-gradient(circle at 30% 30%, rgba(125, 249, 255, 0.22) 0%, rgba(63, 184, 212, 0.10) 45%, transparent 80%);
+    background: radial-gradient(circle at 30% 30%, #2a8aa8 0%, #1a5874 50%, #0c2a3e 100%);
     right: -180px; top: -120px;
     opacity: 0.85;
-    animation: pulse 9s ease-in-out infinite;
   }
   .deco-circle.small {
-    width: 200px; height: 200px;
-    background: radial-gradient(circle, rgba(125, 249, 255, 0.22), transparent 70%);
+    width: 140px; height: 140px;
+    background: #0a2438;
     right: 80px; top: 530px;
-    opacity: 0.7;
-    animation: pulse 12s ease-in-out infinite reverse;
-  }
-  @keyframes pulse {
-    0%, 100% { opacity: 0.55; transform: scale(1); }
-    50%      { opacity: 0.9;  transform: scale(1.06); }
+    opacity: 0.9;
   }
 
   /* -----------------------------------------------------------------
-     Nav
+     Nav — compresses on scroll
   ----------------------------------------------------------------- */
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     display: flex; align-items: center; justify-content: space-between;
     padding: 22px 56px;
-    background: rgba(2, 8, 18, 0.6);
+    background: rgba(2, 8, 18, 0.7);
     backdrop-filter: blur(20px);
     border-bottom: 1px solid transparent;
     transition: padding 0.3s ease, background 0.3s ease, border-color 0.3s ease;
@@ -143,21 +111,19 @@
   .brand {
     display: flex; align-items: center; gap: 12px;
     text-decoration: none;
-    color: var(--cyan);
+    color: var(--gold);
   }
-  .brand .mark {
-    width: 36px; height: 36px;
-    color: var(--cyan);
-    filter: drop-shadow(0 0 8px rgba(125, 249, 255, 0.5));
+  .brand img {
+    width: 44px; height: 44px;
     transition: width 0.3s ease, height 0.3s ease;
   }
-  nav.scrolled .brand .mark { width: 28px; height: 28px; }
+  nav.scrolled .brand img { width: 34px; height: 34px; }
   .brand-name {
     font-family: 'Cinzel', serif;
     font-weight: 500;
     font-size: 22px;
     letter-spacing: 0.18em;
-    color: var(--cyan);
+    color: var(--gold);
     transition: font-size 0.3s ease;
   }
   nav.scrolled .brand-name { font-size: 18px; }
@@ -172,22 +138,18 @@
     letter-spacing: 0.05em;
     transition: color 0.2s;
   }
-  .nav-links a:hover { color: var(--cyan); }
+  .nav-links a:hover { color: var(--gold); }
   .nav-cta {
     padding: 10px 22px;
-    border: 1px solid var(--cyan);
+    border: 1px solid var(--gold);
     border-radius: 999px;
-    color: var(--cyan);
+    color: var(--gold);
     text-decoration: none;
     font-size: 13px;
     letter-spacing: 0.08em;
     transition: all 0.25s ease;
   }
-  .nav-cta:hover {
-    background: var(--cyan);
-    color: var(--bg-0);
-    box-shadow: var(--shadow-glow);
-  }
+  .nav-cta:hover { background: var(--gold); color: var(--bg-0); }
   @media (max-width: 800px) {
     nav { padding: 16px 24px; }
     nav.scrolled { padding: 10px 24px; }
@@ -210,28 +172,18 @@
     color: var(--cream);
     line-height: 1.05;
   }
-  h1 {
-    font-size: clamp(64px, 12vw, 180px);
-    letter-spacing: -0.02em;
-    color: var(--cyan);
-    text-shadow: 0 0 40px rgba(125, 249, 255, 0.35), 0 0 100px rgba(125, 249, 255, 0.15);
-  }
-  h2 {
-    font-size: clamp(40px, 5vw, 64px);
-    color: var(--cyan);
-    margin-bottom: 24px;
-    text-shadow: 0 0 24px rgba(125, 249, 255, 0.20);
-  }
-  h3 { font-size: clamp(22px, 2.4vw, 28px); color: var(--cyan); margin-bottom: 12px; }
+  h1 { font-size: clamp(64px, 12vw, 180px); letter-spacing: -0.02em; }
+  h2 { font-size: clamp(40px, 5vw, 64px); color: var(--gold); margin-bottom: 24px; }
+  h3 { font-size: clamp(22px, 2.4vw, 28px); color: var(--gold); margin-bottom: 12px; }
   p { color: var(--cream); font-size: 16px; max-width: 70ch; }
   p.muted { color: var(--muted); }
 
   .accent-bar {
-    display: inline-block; width: 2px; height: 1em; background: var(--cyan);
+    display: inline-block; width: 2px; height: 1em; background: var(--gold);
     margin-right: 18px; vertical-align: middle;
-    box-shadow: 0 0 8px var(--cyan);
   }
 
+  /* Reveal-on-scroll */
   .reveal {
     opacity: 0;
     transform: translateY(30px);
@@ -253,14 +205,14 @@
     font-family: 'Cinzel', serif;
     font-size: 13px;
     letter-spacing: 0.3em;
-    color: var(--cyan);
+    color: var(--gold);
     margin-bottom: 32px;
   }
   .hero-tag {
     font-family: 'Cormorant Garamond', serif;
     font-style: italic;
     font-size: clamp(20px, 2.4vw, 28px);
-    color: var(--cyan);
+    color: var(--gold);
     margin-top: 24px;
     margin-bottom: 12px;
   }
@@ -282,20 +234,21 @@
     .hero-numbers { grid-template-columns: 1fr; gap: 16px; }
   }
   .stat {
-    border-left: 2px solid var(--cyan);
+    border-left: 2px solid var(--gold);
     padding: 8px 0 8px 24px;
-    box-shadow: inset 4px 0 24px -10px rgba(125, 249, 255, 0.25);
   }
   .stat .n {
+    /* Use Inter for stat numerals — Cormorant's old-style figures
+       have descenders that look broken in hero stats. Inter with
+       lining + tabular figures is clean and confident. */
     font-family: 'Inter', sans-serif;
     font-weight: 300;
     font-size: clamp(56px, 7vw, 96px);
-    color: var(--cyan);
+    color: var(--gold);
     line-height: 1;
     letter-spacing: -0.04em;
     font-variant-numeric: lining-nums tabular-nums;
     font-feature-settings: 'lnum' 1, 'tnum' 1;
-    text-shadow: 0 0 24px rgba(125, 249, 255, 0.30);
   }
   .stat .l {
     color: var(--cream);
@@ -324,52 +277,49 @@
     font-family: 'Inter', sans-serif;
   }
   .btn-gold {
-    background: var(--cyan);
+    background: var(--gold);
     color: var(--bg-0);
   }
   .btn-gold:hover {
-    background: var(--cyan-bright);
+    background: var(--gold-bright);
     transform: translateY(-1px);
-    box-shadow: 0 0 40px rgba(125, 249, 255, 0.55);
+    box-shadow: var(--shadow-gold);
   }
   .btn-ghost {
     background: transparent;
-    color: var(--cyan);
-    border: 1px solid var(--cyan);
+    color: var(--gold);
+    border: 1px solid var(--gold);
   }
   .btn-ghost:hover {
     background: rgba(125, 249, 255, 0.08);
-    box-shadow: var(--shadow-glow);
   }
 
-  /* Bioluminescent waveform */
+  /* Animated waveform — SVG, draws on load */
   .waveform {
     width: 100%;
     height: 120px;
     margin-bottom: 24px;
-    opacity: 0.9;
+    opacity: 0.85;
   }
   .waveform path {
-    stroke: var(--cyan);
+    stroke: var(--gold);
     stroke-width: 1.2;
     fill: none;
     stroke-dasharray: 2400;
     stroke-dashoffset: 2400;
     animation: draw 2.4s cubic-bezier(0.4, 0, 0.2, 1) forwards 0.4s;
-    filter: drop-shadow(0 0 6px rgba(125, 249, 255, 0.7)) drop-shadow(0 0 18px rgba(125, 249, 255, 0.35));
   }
   .waveform path.echo {
-    stroke: var(--cyan-mid);
+    stroke: var(--gold-dark);
     opacity: 0.4;
     animation-delay: 0.7s;
-    filter: drop-shadow(0 0 4px rgba(63, 184, 212, 0.5));
   }
   @keyframes draw {
     to { stroke-dashoffset: 0; }
   }
 
   /* -----------------------------------------------------------------
-     Marquee
+     Marquee ticker
   ----------------------------------------------------------------- */
   .marquee {
     position: relative;
@@ -377,7 +327,7 @@
     border-top: 1px solid var(--line);
     border-bottom: 1px solid var(--line);
     padding: 22px 0;
-    background: rgba(6, 20, 39, 0.6);
+    background: var(--bg-1);
     margin: 0;
     max-width: none;
   }
@@ -397,18 +347,17 @@
     font-family: 'Cinzel', serif;
     font-size: 13px;
     letter-spacing: 0.2em;
-    color: var(--cyan);
-    opacity: 0.85;
+    color: var(--gold);
   }
   .marquee-item::after {
     content: "·";
     margin-left: 56px;
-    color: var(--cyan-deep);
-    opacity: 0.6;
+    color: var(--gold-dark);
+    opacity: 0.5;
   }
 
   /* -----------------------------------------------------------------
-     Problem section
+     Problem section — 72-hour black hole
   ----------------------------------------------------------------- */
   .problem-grid {
     display: grid;
@@ -419,30 +368,26 @@
   @media (max-width: 1100px) { .problem-grid { grid-template-columns: repeat(2, 1fr); } }
   @media (max-width: 600px)  { .problem-grid { grid-template-columns: 1fr; } }
   .stat-card {
-    background: rgba(6, 20, 39, 0.55);
+    background: var(--bg-1);
     border: 1px solid var(--line);
     padding: 32px 28px;
     border-radius: 4px;
-    backdrop-filter: blur(6px);
-    transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    transition: border-color 0.3s ease, transform 0.3s ease;
   }
   .stat-card:hover {
     border-color: var(--line-strong);
     transform: translateY(-3px);
-    box-shadow: var(--shadow-glow);
-    background: rgba(12, 34, 64, 0.6);
   }
   .stat-card .n {
     font-family: 'Inter', sans-serif;
     font-weight: 300;
     font-size: clamp(40px, 5vw, 60px);
-    color: var(--cyan);
+    color: var(--gold);
     line-height: 1;
     margin-bottom: 16px;
     letter-spacing: -0.03em;
     font-variant-numeric: lining-nums tabular-nums;
     font-feature-settings: 'lnum' 1, 'tnum' 1;
-    text-shadow: 0 0 18px rgba(125, 249, 255, 0.25);
   }
   .stat-card .l { color: var(--cream); font-size: 14px; opacity: 0.85; }
 
@@ -450,16 +395,14 @@
      5-step Tether cycle
   ----------------------------------------------------------------- */
   .cycle-intro {
-    background: rgba(6, 20, 39, 0.6);
-    border-left: 2px solid var(--cyan);
-    box-shadow: inset 4px 0 30px -10px rgba(125, 249, 255, 0.3);
+    background: var(--bg-1);
+    border-left: 2px solid var(--gold);
     padding: 20px 28px;
     margin: 36px 0 56px;
     font-style: italic;
     font-family: 'Cormorant Garamond', serif;
     font-size: clamp(18px, 1.8vw, 22px);
     color: var(--cream);
-    backdrop-filter: blur(6px);
   }
   .cycle {
     display: flex; flex-direction: column;
@@ -478,16 +421,15 @@
   .step-num {
     width: 44px; height: 44px;
     border-radius: 50%;
-    border: 1px solid var(--cyan);
+    border: 1px solid var(--gold);
     display: flex; align-items: center; justify-content: center;
-    color: var(--cyan);
+    color: var(--gold);
     font-size: 12px;
     letter-spacing: 0.1em;
     font-family: 'Cinzel', serif;
-    box-shadow: 0 0 12px rgba(125, 249, 255, 0.25), inset 0 0 12px rgba(125, 249, 255, 0.15);
   }
   .step-title {
-    color: var(--cyan);
+    color: var(--gold);
     font-family: 'Cormorant Garamond', serif;
     font-size: clamp(20px, 2vw, 24px);
     font-weight: 500;
@@ -499,15 +441,13 @@
   }
 
   /* -----------------------------------------------------------------
-     ROI
+     ROI section
   ----------------------------------------------------------------- */
   .roi {
-    background: rgba(6, 20, 39, 0.65);
-    border: 1px solid var(--line);
+    background: var(--bg-1);
     border-radius: 4px;
     padding: 56px 48px;
     margin-top: 40px;
-    backdrop-filter: blur(8px);
   }
   .roi-eyebrow {
     font-family: 'Cinzel', serif;
@@ -524,17 +464,12 @@
     font-size: 16px;
     color: var(--cream);
   }
-  .roi-bar.cost {
-    background: rgba(232, 93, 110, 0.14);
-    border: 1px solid rgba(232, 93, 110, 0.35);
-    color: #f5b4bd;
-  }
+  .roi-bar.cost { background: var(--danger); }
   .roi-bar.tether {
-    background: linear-gradient(90deg, rgba(125, 249, 255, 0.18), rgba(125, 249, 255, 0.04));
-    color: var(--cyan);
-    border-left: 12px solid var(--cyan);
+    background: var(--bg-2);
+    color: var(--gold);
+    border-left: 12px solid var(--gold);
     padding-left: 12px;
-    box-shadow: var(--shadow-glow);
   }
   .roi-bar .amount {
     font-family: 'Inter', sans-serif;
@@ -553,7 +488,7 @@
   }
 
   /* -----------------------------------------------------------------
-     Audience cards
+     Audience cards (Patients / Nurses / Hospitals)
   ----------------------------------------------------------------- */
   .audience-grid {
     display: grid;
@@ -563,19 +498,15 @@
   }
   @media (max-width: 900px) { .audience-grid { grid-template-columns: 1fr; } }
   .audience-card {
-    background: rgba(6, 20, 39, 0.55);
-    border-top: 2px solid var(--cyan);
+    background: var(--bg-1);
+    border-top: 2px solid var(--gold);
     padding: 36px 32px;
     border-radius: 0 0 4px 4px;
-    backdrop-filter: blur(6px);
-    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
-    box-shadow: 0 -1px 18px -4px rgba(125, 249, 255, 0.25);
+    transition: transform 0.3s ease, border-color 0.3s ease;
   }
   .audience-card:hover {
     transform: translateY(-4px);
-    border-top-color: var(--cyan-bright);
-    background: rgba(12, 34, 64, 0.6);
-    box-shadow: 0 -1px 28px -2px rgba(125, 249, 255, 0.4);
+    border-top-color: var(--gold-bright);
   }
   .audience-card h3 { margin-bottom: 16px; }
   .audience-card p { color: var(--cream); font-size: 15px; }
@@ -597,31 +528,19 @@
   }
   .compare thead th { font-family: 'Cinzel', serif; letter-spacing: 0.1em; font-weight: 500; font-size: 12px; }
   .compare th:first-child { color: var(--cream); }
-  .compare th:nth-child(2) { background: rgba(125, 249, 255, 0.16); color: var(--cyan-bright); text-align: center; }
-  .compare th:nth-child(3) { background: rgba(232, 93, 110, 0.14); color: #f5b4bd; text-align: center; }
-  .compare td:nth-child(2) {
-    background: rgba(125, 249, 255, 0.06);
-    text-align: center;
-    color: var(--cyan);
-    font-size: 20px;
-    text-shadow: 0 0 12px rgba(125, 249, 255, 0.5);
-  }
-  .compare td:nth-child(3) {
-    background: rgba(232, 93, 110, 0.06);
-    text-align: center;
-    color: #e85d6e;
-    font-size: 18px;
-  }
-  .compare tbody tr:hover td { background: rgba(125, 249, 255, 0.04); }
+  .compare th:nth-child(2) { background: rgba(125, 249, 255, 0.18); color: var(--gold-bright); text-align: center; }
+  .compare th:nth-child(3) { background: rgba(192, 65, 62, 0.18); color: #E08E8B; text-align: center; }
+  .compare td:nth-child(2) { background: rgba(47, 158, 126, 0.06); text-align: center; color: var(--success); font-size: 20px; }
+  .compare td:nth-child(3) { background: rgba(192, 65, 62, 0.06); text-align: center; color: #E08E8B; font-size: 18px; }
+  .compare tbody tr:hover td { background: rgba(125, 249, 255, 0.03); }
   .moat {
     margin-top: 32px;
     font-family: 'Cormorant Garamond', serif;
     font-style: italic;
     font-size: 20px;
-    color: var(--cyan);
-    border-left: 2px solid var(--cyan);
+    color: var(--gold);
+    border-left: 2px solid var(--gold);
     padding-left: 20px;
-    box-shadow: inset 4px 0 24px -10px rgba(125, 249, 255, 0.3);
   }
 
   /* -----------------------------------------------------------------
@@ -635,21 +554,15 @@
   }
   @media (max-width: 900px) { .team-grid { grid-template-columns: 1fr; } }
   .team-card {
-    background: rgba(6, 20, 39, 0.55);
+    background: var(--bg-1);
     padding: 36px 32px;
     border-radius: 4px;
     border: 1px solid var(--line);
-    backdrop-filter: blur(6px);
-    transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s, background 0.3s;
+    transition: border-color 0.3s, transform 0.3s;
   }
-  .team-card:hover {
-    border-color: var(--line-strong);
-    transform: translateY(-3px);
-    box-shadow: var(--shadow-glow);
-    background: rgba(12, 34, 64, 0.6);
-  }
+  .team-card:hover { border-color: var(--line-strong); transform: translateY(-3px); }
   .team-name {
-    color: var(--cyan);
+    color: var(--gold);
     font-family: 'Cormorant Garamond', serif;
     font-size: 24px;
     font-weight: 500;
@@ -670,27 +583,50 @@
     padding: 4px 0;
     transition: color 0.2s;
   }
-  .team-contact a:hover { color: var(--cyan); }
+  .team-contact a:hover { color: var(--gold); }
 
   /* -----------------------------------------------------------------
-     CTA
+     Roadmap
+  ----------------------------------------------------------------- */
+  .roadmap {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-top: 48px;
+    position: relative;
+  }
+  @media (max-width: 900px) { .roadmap { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px) { .roadmap { grid-template-columns: 1fr; } }
+  .roadmap-card {
+    background: var(--bg-1);
+    border: 1px solid var(--line);
+    padding: 28px 24px;
+    border-radius: 4px;
+    position: relative;
+  }
+  .roadmap-card .q {
+    font-family: 'Cinzel', serif;
+    font-size: 13px;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+  .roadmap-card .t {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    color: var(--cream);
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+  .roadmap-card .d { color: var(--muted); font-size: 13px; line-height: 1.6; }
+
+  /* -----------------------------------------------------------------
+     CTA — Nordic hospitals / insurers
   ----------------------------------------------------------------- */
   .final-cta {
     text-align: center;
     background: radial-gradient(circle at 50% 0%, rgba(125, 249, 255, 0.12), transparent 60%);
     padding: 140px 56px;
-    position: relative;
-  }
-  .final-cta::before {
-    content: "";
-    position: absolute;
-    width: 700px; height: 700px;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    background: radial-gradient(circle, rgba(125, 249, 255, 0.10), transparent 60%);
-    border-radius: 50%;
-    z-index: -1;
-    animation: pulse 10s ease-in-out infinite;
   }
   .final-cta h2 {
     max-width: 14ch;
@@ -713,20 +649,17 @@
   .email-capture input {
     flex: 1; min-width: 280px;
     padding: 16px 22px;
-    background: rgba(6, 20, 39, 0.7);
+    background: var(--bg-1);
     border: 1px solid var(--line-strong);
     color: var(--cream);
     border-radius: 999px;
     font-size: 14px;
     font-family: 'Inter', sans-serif;
     outline: none;
-    transition: border-color 0.2s, box-shadow 0.2s;
+    transition: border-color 0.2s;
   }
-  .email-capture input:focus {
-    border-color: var(--cyan);
-    box-shadow: var(--shadow-glow);
-  }
-  .email-capture input::placeholder { color: var(--deep); }
+  .email-capture input:focus { border-color: var(--gold); }
+  .email-capture input::placeholder { color: var(--muted); }
 
   /* -----------------------------------------------------------------
      Footer
@@ -736,7 +669,7 @@
     padding: 48px 56px;
     color: var(--muted);
     font-size: 13px;
-    background: rgba(2, 8, 18, 0.8);
+    background: var(--bg-0);
   }
   .footer-row {
     display: flex; justify-content: space-between; align-items: center;
@@ -744,25 +677,17 @@
     flex-wrap: wrap; gap: 20px;
   }
   footer a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
-  footer a:hover { color: var(--cyan); }
+  footer a:hover { color: var(--gold); }
   .footer-mark {
     display: flex; align-items: center; gap: 10px;
-    color: var(--cyan);
+    color: var(--gold);
     font-family: 'Cinzel', serif;
     letter-spacing: 0.18em;
   }
-  .footer-mark .mark {
-    width: 28px; height: 28px;
-    color: var(--cyan);
-    filter: drop-shadow(0 0 6px rgba(125, 249, 255, 0.4));
-  }
+  .footer-mark img { width: 28px; height: 28px; }
 </style>
 </head>
 <body>
-
-<!-- Ambient backdrop -->
-<div class="ambient" aria-hidden="true"></div>
-<canvas class="specks" id="specks" aria-hidden="true"></canvas>
 
 <!-- Custom cursor -->
 <div class="cursor-dot"></div>
@@ -773,11 +698,7 @@
 <!-- ============================================================== -->
 <nav id="topnav">
   <a class="brand" href="#top">
-    <svg class="mark" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.2">
-      <circle cx="16" cy="16" r="13"/>
-      <circle cx="16" cy="16" r="7" opacity="0.5"/>
-      <circle cx="16" cy="16" r="2" fill="currentColor" stroke="none"/>
-    </svg>
+    <img src="./assets/avlynor-mark.svg" alt="Avlynor mark" />
     <span class="brand-name">AVLYNOR</span>
   </a>
   <ul class="nav-links">
@@ -802,6 +723,7 @@
   <div class="hero-tag"><span class="accent-bar"></span>One check-in. One guardian. Zero friction.</div>
   <p class="hero-sub">A passive voice biomarker platform that detects post-discharge patient deterioration <strong>48 hours before any symptom</strong>.</p>
 
+  <!-- The three headline numbers from Nitya's brief -->
   <div class="hero-numbers">
     <div class="stat reveal">
       <div class="n">48h</div>
@@ -817,6 +739,7 @@
     </div>
   </div>
 
+  <!-- Animated waveform — draws on load -->
   <svg class="waveform" viewBox="0 0 1200 120" preserveAspectRatio="none">
     <path class="echo" d="M0,60 Q40,40 80,60 T160,60 T240,60 T320,60 T400,60 Q440,5 480,60 T560,60 T640,60 Q680,90 720,60 T800,60 T880,60 Q920,30 960,60 T1040,60 T1120,60 T1200,60" />
     <path d="M0,60 Q30,50 60,60 T120,60 Q160,15 200,60 T280,60 Q310,85 340,60 T420,60 T500,60 Q540,10 580,60 T660,60 Q700,85 740,60 T820,60 T900,60 Q940,20 980,60 T1060,60 T1140,60 T1200,60" />
@@ -829,7 +752,7 @@
 </section>
 
 <!-- ============================================================== -->
-<!-- MARQUEE -->
+<!-- MARQUEE TICKER — technical credentials -->
 <!-- ============================================================== -->
 <div class="marquee" aria-hidden="true">
   <div class="marquee-track">
@@ -844,7 +767,7 @@
     <span class="marquee-item">Sara et al. 2020</span>
     <span class="marquee-item">No audio leaves the phone</span>
     <span class="marquee-item">No hardware required</span>
-    <!-- duplicate -->
+    <!-- duplicate for seamless loop -->
     <span class="marquee-item">EU MDR ready</span>
     <span class="marquee-item">GDPR compliant by architecture</span>
     <span class="marquee-item">Sweden 1177 prescribable</span>
@@ -860,7 +783,7 @@
 </div>
 
 <!-- ============================================================== -->
-<!-- PROBLEM -->
+<!-- THE 72-HOUR BLACK HOLE -->
 <!-- ============================================================== -->
 <section id="problem">
   <h2 class="reveal">The 72-hour black hole</h2>
@@ -868,7 +791,7 @@
     Every year, hundreds of thousands of patients survive surgery, then quietly deteriorate at home. Discharge is a "send and pray" event. Within hours, patients forget up to 80% of their instructions. Most apps assume health literacy that recovering patients (elderly, medicated, exhausted) simply do not have.
   </p>
   <p class="reveal">
-    The result: 14 to 18 percent are readmitted within 30 days. Not because surgery failed. Because the safety net collapsed the moment they walked out the door.
+    The result: 14–18% are readmitted within 30 days. Not because surgery failed. Because the safety net collapsed the moment they walked out the door.
   </p>
 
   <div class="problem-grid">
@@ -892,7 +815,7 @@
 </section>
 
 <!-- ============================================================== -->
-<!-- HOW IT WORKS -->
+<!-- HOW TETHER WORKS — 5-step cycle -->
 <!-- ============================================================== -->
 <section id="how">
   <h2 class="reveal">The human voice<br/>is a biological sensor</h2>
@@ -1037,7 +960,7 @@
 </section>
 
 <!-- ============================================================== -->
-<!-- FINAL CTA -->
+<!-- FINAL CTA — Nordic hospitals / insurers -->
 <!-- ============================================================== -->
 <section id="cta" class="final-cta">
   <h2 class="reveal">Bring Tether to your discharge ward.</h2>
@@ -1046,7 +969,7 @@
     <input type="email" required placeholder="your-email@hospital.region.se" id="captureEmail" />
     <button type="submit" class="btn btn-gold">Request a pilot conversation</button>
   </form>
-  <p class="muted reveal" style="margin-top:24px; font-size:13px">Or reach Nitya directly at <a href="mailto:nmahelay09@gmail.com" style="color:var(--cyan)">nmahelay09@gmail.com</a>.</p>
+  <p class="muted reveal" style="margin-top:24px; font-size:13px">Or reach Nitya directly at <a href="mailto:nmahelay09@gmail.com" style="color:var(--gold)">nmahelay09@gmail.com</a>.</p>
 </section>
 
 <!-- ============================================================== -->
@@ -1055,11 +978,7 @@
 <footer>
   <div class="footer-row">
     <div class="footer-mark">
-      <svg class="mark" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.2">
-        <circle cx="16" cy="16" r="13"/>
-        <circle cx="16" cy="16" r="7" opacity="0.5"/>
-        <circle cx="16" cy="16" r="2" fill="currentColor" stroke="none"/>
-      </svg>
+      <img src="./assets/avlynor-mark.svg" alt="Avlynor mark" />
       AVLYNOR
     </div>
     <div>© 2026 Avlynor.</div>
@@ -1076,61 +995,7 @@
 <!-- ============================================================== -->
 <script>
   // -----------------------------------------------------------------
-  // Bioluminescent specks — drifting plankton in the background
-  // -----------------------------------------------------------------
-  (function () {
-    const canvas = document.getElementById('specks');
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    let w, h, particles;
-
-    function resize() {
-      w = canvas.width = window.innerWidth * window.devicePixelRatio;
-      h = canvas.height = window.innerHeight * window.devicePixelRatio;
-      canvas.style.width = window.innerWidth + 'px';
-      canvas.style.height = window.innerHeight + 'px';
-      seed();
-    }
-    function seed() {
-      const count = Math.min(80, Math.floor((w * h) / 25000));
-      particles = Array.from({ length: count }, () => ({
-        x: Math.random() * w,
-        y: Math.random() * h,
-        r: Math.random() * 1.3 + 0.3,
-        vx: (Math.random() - 0.5) * 0.15,
-        vy: (Math.random() - 0.5) * 0.15,
-        alpha: Math.random() * 0.5 + 0.2,
-        phase: Math.random() * Math.PI * 2,
-      }));
-    }
-    function frame(t) {
-      ctx.clearRect(0, 0, w, h);
-      const time = t * 0.001;
-      for (const p of particles) {
-        p.x += p.vx;
-        p.y += p.vy;
-        if (p.x < 0) p.x = w;
-        if (p.x > w) p.x = 0;
-        if (p.y < 0) p.y = h;
-        if (p.y > h) p.y = 0;
-        const a = p.alpha * (0.6 + 0.4 * Math.sin(time + p.phase));
-        ctx.beginPath();
-        const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 6);
-        grad.addColorStop(0, `rgba(125, 249, 255, ${a})`);
-        grad.addColorStop(1, 'rgba(125, 249, 255, 0)');
-        ctx.fillStyle = grad;
-        ctx.arc(p.x, p.y, p.r * 6, 0, Math.PI * 2);
-        ctx.fill();
-      }
-      requestAnimationFrame(frame);
-    }
-    resize();
-    window.addEventListener('resize', resize);
-    requestAnimationFrame(frame);
-  })();
-
-  // -----------------------------------------------------------------
-  // Custom cursor
+  // Custom cursor — dot + ring, ring expands on hover over interactives
   // -----------------------------------------------------------------
   (function () {
     const dot = document.querySelector('.cursor-dot');
@@ -1148,7 +1013,7 @@
       requestAnimationFrame(frame);
     }
     frame();
-    const interactives = 'a, button, input, .stat-card, .audience-card, .team-card, .step';
+    const interactives = 'a, button, input, .stat-card, .audience-card, .team-card, .roadmap-card, .step';
     document.querySelectorAll(interactives).forEach(el => {
       el.addEventListener('mouseenter', () => ring.classList.add('hover'));
       el.addEventListener('mouseleave', () => ring.classList.remove('hover'));
@@ -1167,7 +1032,7 @@
   })();
 
   // -----------------------------------------------------------------
-  // Reveal-on-scroll
+  // Reveal on scroll via IntersectionObserver
   // -----------------------------------------------------------------
   (function () {
     const els = document.querySelectorAll('.reveal');
@@ -1183,7 +1048,8 @@
   })();
 
   // -----------------------------------------------------------------
-  // Email capture
+  // Email capture — for now, just opens a mailto draft to Nitya
+  // (no backend; honest "we'll wire a real form later" behaviour)
   // -----------------------------------------------------------------
   function handleCapture(e) {
     e.preventDefault();
