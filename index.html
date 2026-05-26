@@ -14,19 +14,19 @@
      Brand tokens — match the Avlynor logo
   ----------------------------------------------------------------- */
   :root {
-    --bg-0: #020812;            /* abyssal black-blue */
-    --bg-1: #061427;            /* deep-water panel */
-    --bg-2: #0c2240;            /* slightly lit panel */
-    --gold: #7df9ff;            /* primary luminescent cyan */
-    --gold-dark: #3fb8d4;
-    --gold-bright: #b8fcff;
-    --cream: #e6f7ff;
-    --muted: #a8c5d4;
-    --line: rgba(125, 249, 255, 0.18);
-    --line-strong: rgba(125, 249, 255, 0.38);
-    --danger: #e85d6e;
-    --success: #7df9ff;
-    --shadow-gold: 0 0 60px -20px rgba(125, 249, 255, 0.40);
+    --bg-0: #0a1830;            /* dark ocean blue — lighter than abyss */
+    --bg-1: #0e1f3b;            /* panel bg */
+    --bg-2: #14274a;            /* slightly elevated */
+    --gold: #D4B572;            /* primary gold — matches logo */
+    --gold-dark: #C9A55A;
+    --gold-bright: #E8CC85;
+    --cream: #F5EFE0;
+    --muted: #8A95B0;
+    --line: rgba(212, 181, 114, 0.18);
+    --line-strong: rgba(212, 181, 114, 0.38);
+    --danger: #C0413E;
+    --success: #2F9E7E;
+    --shadow-gold: 0 0 60px -20px rgba(212, 181, 114, 0.35);
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -56,13 +56,13 @@
   }
   .cursor-ring {
     width: 32px; height: 32px;
-    border: 1px solid rgba(125, 249, 255, 0.45);
+    border: 1px solid rgba(212, 181, 114, 0.45);
     border-radius: 50%;
   }
   .cursor-ring.hover {
     width: 56px; height: 56px;
     border-color: var(--gold);
-    background: rgba(125, 249, 255, 0.06);
+    background: rgba(212, 181, 114, 0.06);
   }
   @media (hover: none) {
     body { cursor: auto; }
@@ -98,14 +98,14 @@
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     display: flex; align-items: center; justify-content: space-between;
     padding: 22px 56px;
-    background: rgba(2, 8, 18, 0.7);
+    background: rgba(10, 24, 48, 0.7);
     backdrop-filter: blur(20px);
     border-bottom: 1px solid transparent;
     transition: padding 0.3s ease, background 0.3s ease, border-color 0.3s ease;
   }
   nav.scrolled {
     padding: 12px 56px;
-    background: rgba(2, 8, 18, 0.92);
+    background: rgba(10, 24, 48, 0.92);
     border-bottom-color: var(--line);
   }
   .brand {
@@ -291,7 +291,7 @@
     border: 1px solid var(--gold);
   }
   .btn-ghost:hover {
-    background: rgba(125, 249, 255, 0.08);
+    background: rgba(212, 181, 114, 0.08);
   }
 
   /* Animated waveform — SVG, draws on load */
@@ -417,7 +417,7 @@
     transition: background 0.3s ease;
   }
   .step:last-child { border-bottom: 1px solid var(--line); }
-  .step:hover { background: rgba(125, 249, 255, 0.025); }
+  .step:hover { background: rgba(212, 181, 114, 0.025); }
   .step-num {
     width: 44px; height: 44px;
     border-radius: 50%;
@@ -528,11 +528,11 @@
   }
   .compare thead th { font-family: 'Cinzel', serif; letter-spacing: 0.1em; font-weight: 500; font-size: 12px; }
   .compare th:first-child { color: var(--cream); }
-  .compare th:nth-child(2) { background: rgba(125, 249, 255, 0.18); color: var(--gold-bright); text-align: center; }
+  .compare th:nth-child(2) { background: rgba(212, 181, 114, 0.18); color: var(--gold-bright); text-align: center; }
   .compare th:nth-child(3) { background: rgba(192, 65, 62, 0.18); color: #E08E8B; text-align: center; }
   .compare td:nth-child(2) { background: rgba(47, 158, 126, 0.06); text-align: center; color: var(--success); font-size: 20px; }
   .compare td:nth-child(3) { background: rgba(192, 65, 62, 0.06); text-align: center; color: #E08E8B; font-size: 18px; }
-  .compare tbody tr:hover td { background: rgba(125, 249, 255, 0.03); }
+  .compare tbody tr:hover td { background: rgba(212, 181, 114, 0.03); }
   .moat {
     margin-top: 32px;
     font-family: 'Cormorant Garamond', serif;
@@ -625,7 +625,7 @@
   ----------------------------------------------------------------- */
   .final-cta {
     text-align: center;
-    background: radial-gradient(circle at 50% 0%, rgba(125, 249, 255, 0.12), transparent 60%);
+    background: radial-gradient(circle at 50% 0%, rgba(212, 181, 114, 0.12), transparent 60%);
     padding: 140px 56px;
   }
   .final-cta h2 {
