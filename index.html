@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Avlynor — Tether · One check-in. One guardian. Zero friction.</title>
+<title>Avlynor · Tether · One check-in. One guardian. Zero friction.</title>
 <meta name="description" content="Avlynor builds Tether, a passive voice biomarker platform that detects post-discharge patient deterioration 48 hours before any symptom. Built for European healthcare." />
 <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -238,12 +238,17 @@
     padding: 8px 0 8px 24px;
   }
   .stat .n {
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 500;
+    /* Use Inter for stat numerals — Cormorant's old-style figures
+       have descenders that look broken in hero stats. Inter with
+       lining + tabular figures is clean and confident. */
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
     font-size: clamp(56px, 7vw, 96px);
     color: var(--gold);
     line-height: 1;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.04em;
+    font-variant-numeric: lining-nums tabular-nums;
+    font-feature-settings: 'lnum' 1, 'tnum' 1;
   }
   .stat .l {
     color: var(--cream);
@@ -374,12 +379,15 @@
     transform: translateY(-3px);
   }
   .stat-card .n {
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 500;
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
     font-size: clamp(40px, 5vw, 60px);
     color: var(--gold);
     line-height: 1;
     margin-bottom: 16px;
+    letter-spacing: -0.03em;
+    font-variant-numeric: lining-nums tabular-nums;
+    font-feature-settings: 'lnum' 1, 'tnum' 1;
   }
   .stat-card .l { color: var(--cream); font-size: 14px; opacity: 0.85; }
 
@@ -464,9 +472,12 @@
     padding-left: 12px;
   }
   .roi-bar .amount {
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
     font-size: 22px;
+    letter-spacing: -0.01em;
+    font-variant-numeric: lining-nums tabular-nums;
+    font-feature-settings: 'lnum' 1, 'tnum' 1;
   }
   .roi-note {
     color: var(--muted);
@@ -710,7 +721,7 @@
   <div class="hero-eyebrow">AVLYNOR · FLAGSHIP PRODUCT</div>
   <h1>TETHER</h1>
   <div class="hero-tag"><span class="accent-bar"></span>One check-in. One guardian. Zero friction.</div>
-  <p class="hero-sub">A passive voice biomarker platform that detects post-discharge patient deterioration <strong>48 hours before any symptom</strong>. Built for European healthcare from day one.</p>
+  <p class="hero-sub">A passive voice biomarker platform that detects post-discharge patient deterioration <strong>48 hours before any symptom</strong>.</p>
 
   <!-- The three headline numbers from Nitya's brief -->
   <div class="hero-numbers">
@@ -777,7 +788,7 @@
 <section id="problem">
   <h2 class="reveal">The 72-hour black hole</h2>
   <p class="reveal" style="margin-bottom: 16px">
-    Every year, hundreds of thousands of patients survive surgery — then quietly deteriorate at home. Discharge is a "send and pray" event. Within hours, patients forget up to 80% of their instructions. Most apps assume health literacy that recovering patients — elderly, medicated, exhausted — simply do not have.
+    Every year, hundreds of thousands of patients survive surgery, then quietly deteriorate at home. Discharge is a "send and pray" event. Within hours, patients forget up to 80% of their instructions. Most apps assume health literacy that recovering patients (elderly, medicated, exhausted) simply do not have.
   </p>
   <p class="reveal">
     The result: 14–18% are readmitted within 30 days. Not because surgery failed. Because the safety net collapsed the moment they walked out the door.
@@ -810,14 +821,14 @@
   <h2 class="reveal">The human voice<br/>is a biological sensor</h2>
 
   <div class="cycle-intro reveal">
-    When fluid builds in the lungs, it increases pressure on the larynx — causing measurable acoustic instability detectable 48 hours before any symptom. Tether captures this in 15 seconds of natural morning speech.
+    When fluid builds in the lungs, it increases pressure on the larynx, causing measurable acoustic instability detectable 48 hours before any symptom. Tether captures this in 15 seconds of natural morning speech.
   </div>
 
   <div class="cycle">
     <div class="step reveal">
       <div class="step-num">01</div>
       <div class="step-title">Baseline calibration</div>
-      <div class="step-desc">A nurse records a 30-second voice fingerprint before the patient leaves the hospital. The baseline is calibrated to the patient's home noise environment, so every future reading is compared against the patient — not against a generic population.</div>
+      <div class="step-desc">A nurse records a 30-second voice fingerprint before the patient leaves the hospital. The baseline is calibrated to the patient's home noise environment, so every future reading is compared against the patient, not against a generic population.</div>
     </div>
     <div class="step reveal">
       <div class="step-num">02</div>
@@ -826,18 +837,18 @@
     </div>
     <div class="step reveal">
       <div class="step-num">03</div>
-      <div class="step-title">On-device analysis — Shredder Protocol</div>
-      <div class="step-desc">A Rust-WASM edge AI extracts jitter, shimmer, HNR, and 100+ acoustic features entirely on-device. Audio is captured, analysed, and immediately deleted. No audio leaves the phone — ever. GDPR by architecture, not by promise.</div>
+      <div class="step-title">On-device analysis · Shredder Protocol</div>
+      <div class="step-desc">A Rust-WASM edge AI extracts jitter, shimmer, HNR, and 100+ acoustic features entirely on-device. Audio is captured, analysed, and immediately deleted. No audio leaves the phone, ever. GDPR by architecture, not by promise.</div>
     </div>
     <div class="step reveal">
       <div class="step-num">04</div>
       <div class="step-title">Nurse Navigator dashboard</div>
-      <div class="step-desc">A Live Recovery Score per patient: green is stable, amber is monitor, red is call now. One nurse can monitor far more patients than traditional daily phone follow-up — because she only acts on the patients who actually need her.</div>
+      <div class="step-desc">A Live Recovery Score per patient: green is stable, amber is monitor, red is call now. One nurse can monitor far more patients than traditional daily phone follow-up, because she only acts on the patients who actually need her.</div>
     </div>
     <div class="step reveal">
       <div class="step-num">05</div>
-      <div class="step-title">Sentinel Alert — 48 hours early</div>
-      <div class="step-desc">When vocal jitter crosses the clinical threshold of 1.04% (Sara et al., 2020), Tether fires an immediate nurse alert — before the patient feels anything. Most readmissions are caught while they are still preventable.</div>
+      <div class="step-title">Sentinel Alert · 48 hours early</div>
+      <div class="step-desc">When vocal jitter crosses the clinical threshold of 1.04% (Sara et al., 2020), Tether fires an immediate nurse alert, before the patient feels anything. Most readmissions are caught while they are still preventable.</div>
     </div>
   </div>
 </section>
@@ -873,7 +884,7 @@
     </div>
     <div class="audience-card reveal">
       <h3>Hospitals</h3>
-      <p>Stop absorbing avoidable readmission costs. Free up beds. Comply with national post-discharge policy — measurably.</p>
+      <p>Stop absorbing avoidable readmission costs. Free up beds. Comply with national post-discharge policy, measurably.</p>
     </div>
   </div>
 </section>
@@ -883,7 +894,7 @@
 <!-- ============================================================== -->
 <section id="moat">
   <h2 class="reveal">Every competitor was<br/>built for the wrong continent</h2>
-  <p class="competitor-intro reveal">Vocalis, Sonde, and HealthMode are cloud-heavy, English-only, hardware-dependent, and built for US private insurance. Rebuilding them to compete in Sweden — let alone the rest of the EU — would take two to three years minimum.</p>
+  <p class="competitor-intro reveal">Vocalis, Sonde, and HealthMode are cloud-heavy, English-only, hardware-dependent, and built for US private insurance. Rebuilding them to compete in Sweden, let alone the rest of the EU, would take two to three years minimum.</p>
 
   <table class="compare reveal">
     <thead>
@@ -894,18 +905,18 @@
       </tr>
     </thead>
     <tbody>
-      <tr><td>On-device processing — no audio leaves the phone</td><td>✓</td><td>✕</td></tr>
+      <tr><td>On-device processing · no audio leaves the phone</td><td>✓</td><td>✕</td></tr>
       <tr><td>No hardware required</td><td>✓</td><td>✕</td></tr>
       <tr><td>26-language support</td><td>✓</td><td>✕</td></tr>
       <tr><td>EU MDR + GDPR compliant architecture</td><td>✓</td><td>✕</td></tr>
       <tr><td>Guardian NLP plain-language translation</td><td>✓</td><td>✕</td></tr>
       <tr><td>Prescribable via Sweden's 1177 national portal</td><td>✓</td><td>✕</td></tr>
       <tr><td>Swedish LOU public procurement compatible</td><td>✓</td><td>✕</td></tr>
-      <tr><td>Bias-free — patient compared to themselves only</td><td>✓</td><td>✕</td></tr>
+      <tr><td>Bias-free · patient compared to themselves only</td><td>✓</td><td>✕</td></tr>
     </tbody>
   </table>
 
-  <p class="moat reveal">The moat is not a single feature — it is a stack of decisions that competitors cannot copy quickly.</p>
+  <p class="moat reveal">The moat is not a single feature. It is a stack of decisions that competitors cannot copy quickly.</p>
 </section>
 
 <!-- ============================================================== -->
@@ -983,7 +994,7 @@
 <!-- ============================================================== -->
 <section id="cta" class="final-cta">
   <h2 class="reveal">Bring Tether to your discharge ward.</h2>
-  <p class="muted reveal">For Nordic hospitals, regional health authorities, and insurers. We'll set up a 30-minute call to walk through the engine, the dashboard, and a pilot proposal tailored to your operating context.</p>
+  <p class="muted reveal">For Nordic hospitals, regional health authorities, and insurers. We will set up a 30-minute call to walk through the engine, the dashboard, and a pilot proposal tailored to your operating context.</p>
   <form class="email-capture reveal" onsubmit="handleCapture(event)">
     <input type="email" required placeholder="your-email@hospital.region.se" id="captureEmail" />
     <button type="submit" class="btn btn-gold">Request a pilot conversation</button>
@@ -1073,7 +1084,7 @@
   function handleCapture(e) {
     e.preventDefault();
     const email = document.getElementById('captureEmail').value;
-    const subject = encodeURIComponent('Tether pilot conversation — interested partner');
+    const subject = encodeURIComponent('Tether pilot conversation · interested partner');
     const body = encodeURIComponent(
       `Hello Nitya,\n\nWe'd like to set up a 30-minute call to discuss a Tether pilot.\n\nOur email: ${email}\nOur organisation: [please fill in]\nDischarge volume we're considering: [please fill in]\n\nThanks,`
     );
