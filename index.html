@@ -38,35 +38,6 @@
     font-weight: 300;
     line-height: 1.55;
     overflow-x: hidden;
-    cursor: none;     /* hide native cursor; custom cursor below */
-  }
-
-  /* -----------------------------------------------------------------
-     Custom cursor
-  ----------------------------------------------------------------- */
-  .cursor-dot, .cursor-ring {
-    position: fixed; top: 0; left: 0;
-    pointer-events: none; z-index: 9999;
-    transform: translate(-50%, -50%);
-    transition: transform 0.12s ease-out, opacity 0.2s, background 0.2s, border-color 0.2s, width 0.2s, height 0.2s;
-  }
-  .cursor-dot {
-    width: 6px; height: 6px;
-    background: var(--gold); border-radius: 50%;
-  }
-  .cursor-ring {
-    width: 32px; height: 32px;
-    border: 1px solid rgba(212, 181, 114, 0.45);
-    border-radius: 50%;
-  }
-  .cursor-ring.hover {
-    width: 56px; height: 56px;
-    border-color: var(--gold);
-    background: rgba(212, 181, 114, 0.06);
-  }
-  @media (hover: none) {
-    body { cursor: auto; }
-    .cursor-dot, .cursor-ring { display: none; }
   }
 
   /* -----------------------------------------------------------------
@@ -271,7 +242,7 @@
     text-decoration: none;
     font-weight: 500;
     transition: all 0.25s ease;
-    cursor: none;
+    cursor: pointer;
     display: inline-block;
     border: none;
     font-family: 'Inter', sans-serif;
@@ -700,10 +671,6 @@
 </head>
 <body>
 
-<!-- Custom cursor -->
-<div class="cursor-dot"></div>
-<div class="cursor-ring"></div>
-
 <!-- ============================================================== -->
 <!-- NAV -->
 <!-- ============================================================== -->
@@ -1006,32 +973,6 @@
 <!-- JS -->
 <!-- ============================================================== -->
 <script>
-  // -----------------------------------------------------------------
-  // Custom cursor — dot + ring, ring expands on hover over interactives
-  // -----------------------------------------------------------------
-  (function () {
-    const dot = document.querySelector('.cursor-dot');
-    const ring = document.querySelector('.cursor-ring');
-    if (!dot || !ring) return;
-    let rx = 0, ry = 0, tx = 0, ty = 0;
-    document.addEventListener('mousemove', (e) => {
-      tx = e.clientX; ty = e.clientY;
-      dot.style.transform = `translate(${tx}px, ${ty}px) translate(-50%, -50%)`;
-    });
-    function frame() {
-      rx += (tx - rx) * 0.18;
-      ry += (ty - ry) * 0.18;
-      ring.style.transform = `translate(${rx}px, ${ry}px) translate(-50%, -50%)`;
-      requestAnimationFrame(frame);
-    }
-    frame();
-    const interactives = 'a, button, input, .stat-card, .audience-card, .team-card, .roadmap-card, .step';
-    document.querySelectorAll(interactives).forEach(el => {
-      el.addEventListener('mouseenter', () => ring.classList.add('hover'));
-      el.addEventListener('mouseleave', () => ring.classList.remove('hover'));
-    });
-  })();
-
   // -----------------------------------------------------------------
   // Nav compresses on scroll
   // -----------------------------------------------------------------
